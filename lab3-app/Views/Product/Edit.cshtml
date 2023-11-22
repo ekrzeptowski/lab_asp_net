@@ -1,0 +1,48 @@
+﻿@model Product
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form asp-action="Edit" asp-controller="Product" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div>
+        <label asp-for="Name">Nazwa produktu</label>
+        <div>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <input class="form-control" type="text" asp-for="Name" />
+    </div>
+    <div>
+        <label asp-for="Price">Cena</label>
+        <div>
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <input class="form-control" type="number" min="0" max="10000000" step=".01" asp-for="Price" />
+    </div>
+    <div>
+        <label asp-for="Producent">Producent</label>
+        <div>
+            <span asp-validation-for="Producent" class="text-danger"></span>
+        </div>
+        <input class="form-control" type="text" asp-for="Producent" />
+    </div>
+    <div>
+        <label asp-for="ProductionDate">Data produkcji</label>
+        <div>
+            <span asp-validation-for="ProductionDate" class="text-danger"></span>
+        </div>
+        <input class="form-control" type="date" asp-for="ProductionDate" />
+    </div>
+    <div>
+        <label asp-for="Description">Opis</label>
+        <div>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <input class="form-control" type="text" asp-for="Description" />
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Zapisz</button>
+    </div>
+</form>

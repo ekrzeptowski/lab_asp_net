@@ -1,0 +1,19 @@
+﻿@model Product
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h2>Szczegóły produktu</h2>
+
+<a class="btn btn-primary" asp-action="Index" asp-controller="Product">Powrót</a>
+
+<p>Nazwa: @Model.Name</p>
+<p>Cena: @Html.DisplayFor(x => Model.Price)</p>
+<p>Producent: @Model.Producent</p>
+<p>Data produkcji: @Model.ProductionDate</p>
+@if (Model.Description != null)
+{
+    <p>Opis: @Model.Description</p>
+}
