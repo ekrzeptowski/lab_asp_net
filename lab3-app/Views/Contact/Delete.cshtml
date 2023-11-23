@@ -10,6 +10,7 @@
 <p>Email: @Model.Email</p>
 <p>Telefon: @Model.Phone</p>
 <p>Data urodzenia: @Model.Birth</p>
+<p>Priorytet: @Model.Priority.GetDisplayName()</p>
 
 <form asp-action="Delete" asp-controller="Contact" method="post">
     <input type="hidden" asp-for="Id" />

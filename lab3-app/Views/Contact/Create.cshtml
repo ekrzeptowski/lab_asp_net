@@ -7,32 +7,39 @@
 
 <form asp-action="Create" asp-controller="Contact" method="post">
     <div>
-        <label asp-for="Name">Twoje imię</label>
+        <label asp-for="Name"></label>
         <div>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <input class="form-control" type="text" asp-for="Name" />
     </div>
     <div>
-        <label asp-for="Email">Twój email</label>
+        <label asp-for="Email"></label>
         <div>
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
         <input class="form-control" type="text" asp-for="Email" />
     </div>
     <div>
-        <label asp-for="Phone">Twój numer telefonu</label>
+        <label asp-for="Phone"></label>
         <div>
             <span asp-validation-for="Phone" class="text-danger"></span>
         </div>
         <input class="form-control" type="tel" asp-for="Phone" />
     </div>
     <div>
-        <label asp-for="Birth">Data urodzenia</label>
+        <label asp-for="Birth"></label>
         <div>
             <span asp-validation-for="Birth" class="text-danger"></span>
         </div>
         <input class="form-control" type="date" asp-for="Birth" />
+    </div>
+    <div>
+        <label asp-for="Priority"></label>
+        <div>
+            <span asp-validation-for="Priority" class="text-danger"></span>
+        </div>
+        <select class="form-control" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
     </div>
     <div>
         <button type="submit" class="btn btn-primary">Dodaj</button>

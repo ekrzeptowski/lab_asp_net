@@ -9,11 +9,8 @@
 
 <a class="btn btn-primary" asp-action="Index" asp-controller="Product">Powrót</a>
 
-<p>Nazwa: @Model.Name</p>
-<p>Cena: @Html.DisplayFor(x => Model.Price)</p>
-<p>Producent: @Model.Producent</p>
-<p>Data produkcji: @Model.ProductionDate</p>
-@if (Model.Description != null)
-{
-    <p>Opis: @Model.Description</p>
-}
+<p>@Html.DisplayNameFor(model => model.Name): @Model.Name</p>
+<p>@Html.DisplayNameFor(model => model.Price): @Html.DisplayFor(x => Model.Price)</p>
+<p>@Html.DisplayNameFor(model => model.Producent): @Model.Producent</p>
+<p>@Html.DisplayNameFor(model => model.ProductionDate): @Model.ProductionDate</p>
+<p>@Html.DisplayNameFor(model => model.Description): @Model.Description</p>

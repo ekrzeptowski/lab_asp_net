@@ -1,4 +1,4 @@
-﻿@model Dictionary<int, Product>
+﻿@model List<Product>
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -9,19 +9,19 @@
 <a class="btn btn-primary" asp-action="Create" asp-controller="Product">Dodaj produkt</a>
 <table>
     <tr>
-        <th>Nazwa</th>
-        <th>Cena</th>
+        <th>@Html.DisplayNameFor(model => model[0].Name)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Price)</th>
         <th>Akcje</th>
     </tr>
     @foreach (var product in Model)
     {
         <tr>
-            <td>@product.Value.Name</td>
-            <td>@Html.DisplayFor(x => product.Value.Price)</td>
+            <td>@product.Name</td>
+            <td>@Html.DisplayFor(x => product.Price)</td>
             <td>
-                <a class="btn btn-primary" asp-action="Edit" asp-controller="Product" asp-route-id=@product.Value.Id>Edytuj</a>
-                <a class="btn btn-primary" asp-action="Details" asp-controller="Product" asp-route-id=@product.Value.Id>Szczegóły</a>
-                <a class="btn btn-primary" asp-action="Delete" asp-controller="Product" asp-route-id=@product.Value.Id>Usuń</a>
+                <a class="btn btn-primary" asp-action="Edit" asp-controller="Product" asp-route-id=@product.Id>Edytuj</a>
+                <a class="btn btn-primary" asp-action="Details" asp-controller="Product" asp-route-id=@product.Id>Szczegóły</a>
+                <a class="btn btn-primary" asp-action="Delete" asp-controller="Product" asp-route-id=@product.Id>Usuń</a>
             </td>
         </tr>
     }

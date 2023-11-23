@@ -5,15 +5,13 @@ namespace lab3_app.Controllers
 {
     public class ContactController : Controller
     {
-        static Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>()
-        {
-            {1, new Contact(){ Id=1, Name="Stefan", Email="a@asas.com", Phone="123456789", Birth=new DateTime(1980,1,3)} },
-            {2, new Contact(){ Id=2, Name="Jan", Email="j@asas.com", Phone="1122334455", Birth=new DateTime(1990,3,12)}},
-            {3, new Contact(){ Id=3, Name="Anna", Email="a@asas.com", Phone="678543445", Birth=new DateTime(1985,4,21)}}
-        };
+        private readonly IContactService _contactService;
+
+        public ContactController(IContactService contactService) => _contactService = contactService;
+
         public IActionResult Index()
         {
-            return View(_contacts);
+            return View(_contactService.FindAll());
         }
         [HttpGet]
         public IActionResult Create()
@@ -24,9 +22,10 @@ namespace lab3_app.Controllers
         [HttpGet]
         public IActionResult Edit([FromRoute] int id)
         {
-            if (_contacts.ContainsKey(id))
+            var contact = _contactService.FindById(id);
+            if (contact is not null)
             {
-                return View(_contacts[id]);
+                return View(contact);
             }
             else
             {
@@ -37,9 +36,10 @@ namespace lab3_app.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            if (_contacts.ContainsKey(id))
+            var contact = _contactService.FindById(id);
+            if (contact is not null)
             {
-                return View(_contacts[id]);
+                return View(contact);
             }
             else
             {
@@ -50,9 +50,9 @@ namespace lab3_app.Controllers
         [HttpPost]
         public IActionResult Delete([FromForm] Contact contact)
         {
-            if (_contacts.ContainsKey(contact.Id))
+            if (_contactService.FindById(contact.Id) is not null)
             {
-                _contacts.Remove(contact.Id);
+                _contactService.Delete(contact.Id);
                 return RedirectToAction("Index");
             }
             else
@@ -64,9 +64,10 @@ namespace lab3_app.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            if (_contacts.ContainsKey(id))
+            var contact = _contactService.FindById(id);
+            if (contact is not null)
             {
-                return View(_contacts[id]);
+                return View(contact);
             }
             else
             {
@@ -79,9 +80,7 @@ namespace lab3_app.Controllers
         {
             if (ModelState.IsValid)
             {
-                int id = _contacts.Keys.Count != 0 ? _contacts.Keys.Max() : 0;
-                contact.Id = id + 1;
-                _contacts.Add(contact.Id, contact);
+                _contactService.Add(contact);
 
                 return RedirectToAction("Index");
             }
@@ -96,9 +95,9 @@ namespace lab3_app.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_contacts.ContainsKey(contact.Id))
+                if (_contactService.FindById(contact.Id) is not null)
                 {
-                    _contacts[contact.Id] = contact;
+                    _contactService.Update(contact);
                     return RedirectToAction("Index");
                 }
                 else

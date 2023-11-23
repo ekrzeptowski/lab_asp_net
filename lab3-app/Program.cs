@@ -1,3 +1,5 @@
+using lab3_app.Models;
+
 namespace lab3_app
 {
     public class Program
@@ -8,6 +10,9 @@ namespace lab3_app
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<IContactService, MemoryContactService>();
+            builder.Services.AddSingleton<IProductService, MemoryProductService>();
+            builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
 
             var app = builder.Build();
 

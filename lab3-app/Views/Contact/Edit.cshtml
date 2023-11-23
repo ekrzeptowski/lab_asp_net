@@ -34,6 +34,13 @@
         </div>
         <input class="form-control" type="date" asp-for="Birth" />
     </div>
+    <div>
+        <label asp-for="Priority"></label>
+        <div>
+            <span asp-validation-for="Priority" class="text-danger"></span>
+        </div>
+        <select class="form-control" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
+    </div>
     <input type="hidden" asp-for="Id"/>
     <div>
         <button type="submit" class="btn btn-primary">Zapisz</button>

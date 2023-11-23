@@ -6,11 +6,11 @@
 }
 
 <p>Czy chcesz usunąć produkt:</p>
-<p>Nazwa: @Model.Name</p>
-<p>Cena: @Model.Price</p>
-<p>Producent: @Model.Producent</p>
-<p>Data produkcji: @Model.ProductionDate</p>
-<p>Opis: @Model.Description</p>
+<p>@Html.DisplayNameFor(model => model.Name): @Model.Name</p>
+<p>@Html.DisplayNameFor(model => model.Price): @Html.DisplayFor(x => Model.Price)</p>
+<p>@Html.DisplayNameFor(model => model.Producent): @Model.Producent</p>
+<p>@Html.DisplayNameFor(model => model.ProductionDate): @Model.ProductionDate</p>
+<p>@Html.DisplayNameFor(model => model.Description): @Model.Description</p>
 
 <form asp-action="Delete" asp-controller="Product" method="post">
     <input type="hidden" asp-for="Id" />
