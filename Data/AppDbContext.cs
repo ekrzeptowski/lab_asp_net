@@ -9,7 +9,9 @@ namespace Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"data source=d:\contacts.db");
+            string baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
+            baseDir = baseDir.Substring(0, baseDir.LastIndexOf("lab_asp_net")) + "lab_asp_net";
+            optionsBuilder.UseSqlite($"data source={baseDir}\\data.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

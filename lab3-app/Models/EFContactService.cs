@@ -1,33 +1,45 @@
-﻿namespace lab3_app.Models
+﻿using Data;
+using Data.Entities;
+using lab3_app.Mappers;
+
+namespace lab3_app.Models
 {
     public class EFContactService : IContactService
     {
-
-        private readonly ContactEntity
+        private AppDbContext _context;
+        public EFContactService(AppDbContext context) => _context = context;
 
         public int Add(Contact contact)
         {
-            throw new NotImplementedException();
+            var e = _context.Contacts.Add(ContactMapper.ToEntity(contact));
+            _context.SaveChanges();
+            return e.Entity.Id;
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            ContactEntity? find = _context.Contacts.Find(id);
+            if (find != null)
+            {
+                _context.Contacts.Remove(find);
+                _context.SaveChanges();
+            }
         }
 
         public List<Contact> FindAll()
         {
-            throw new NotImplementedException();
+            return _context.Contacts.Select(e => ContactMapper.FromEntity(e)).ToList();
         }
 
         public Contact? FindById(int id)
         {
-            throw new NotImplementedException();
+            return ContactMapper.FromEntity(_context.Contacts.Find(id));
         }
 
         public void Update(Contact contact)
         {
-            throw new NotImplementedException();
+            _context.Contacts.Update(ContactMapper.ToEntity(contact));
+            _context.SaveChanges();
         }
     }
 }

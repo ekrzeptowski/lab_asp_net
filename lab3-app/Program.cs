@@ -10,8 +10,8 @@ namespace lab3_app
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext();
-            builder.Services.AddSingleton<IContactService, MemoryContactService>();
+            builder.Services.AddDbContext<Data.AppDbContext>();
+            builder.Services.AddTransient<IContactService, EFContactService>();
             builder.Services.AddSingleton<IProductService, MemoryProductService>();
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
 
