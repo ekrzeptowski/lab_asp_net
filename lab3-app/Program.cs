@@ -12,7 +12,7 @@ namespace lab3_app
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<Data.AppDbContext>();
             builder.Services.AddTransient<IContactService, EFContactService>();
-            builder.Services.AddSingleton<IProductService, MemoryProductService>();
+            builder.Services.AddTransient<IProductService, EFProductService>();
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
 
             var app = builder.Build();
