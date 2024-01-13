@@ -1,4 +1,5 @@
 using lab3_app.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace lab3_app
 {
@@ -9,11 +10,16 @@ namespace lab3_app
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<Data.AppDbContext>();
+            builder.Services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<Data.AppDbContext>();
+
             builder.Services.AddTransient<IContactService, EFContactService>();
             builder.Services.AddTransient<IProductService, EFProductService>();
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
+            builder.Services.AddMemoryCache();
+            builder.Services.AddSession();
 
             var app = builder.Build();
 
