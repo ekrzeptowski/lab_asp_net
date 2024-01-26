@@ -1,14 +1,17 @@
 ﻿using lab3_app.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lab3_app.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ContactController : Controller
     {
         private readonly IContactService _contactService;
 
         public ContactController(IContactService contactService) => _contactService = contactService;
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(_contactService.FindAll());

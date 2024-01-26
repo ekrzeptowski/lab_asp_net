@@ -47,6 +47,7 @@ namespace Data
             {
                 Id = ADMIN_ID,
                 Email = "adam@wsei.edu.pl",
+                NormalizedEmail = "adam@wsei.edu.pl",
                 EmailConfirmed = true,
                 UserName = "adam",
                 NormalizedUserName = "ADMIN"
@@ -57,6 +58,7 @@ namespace Data
             {
                 Id = USER_ID,
                 Email = "user@wsei.edu.pl",
+                NormalizedEmail = "user@wsei.edu.pl",
                 EmailConfirmed = true,
                 UserName = "user",
                 NormalizedUserName = "USER"
