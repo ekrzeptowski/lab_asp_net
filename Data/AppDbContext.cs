@@ -47,10 +47,10 @@ namespace Data
             {
                 Id = ADMIN_ID,
                 Email = "adam@wsei.edu.pl",
-                NormalizedEmail = "adam@wsei.edu.pl",
+                NormalizedEmail = "adam@wsei.edu.pl".ToUpper(),
                 EmailConfirmed = true,
                 UserName = "adam",
-                NormalizedUserName = "ADMIN"
+                NormalizedUserName = "ADAM"
             };
 
             // utworzenie użytkownika jako użytkownika
@@ -58,7 +58,7 @@ namespace Data
             {
                 Id = USER_ID,
                 Email = "user@wsei.edu.pl",
-                NormalizedEmail = "user@wsei.edu.pl",
+                NormalizedEmail = "user@wsei.edu.pl".ToUpper(),
                 EmailConfirmed = true,
                 UserName = "user",
                 NormalizedUserName = "USER"
