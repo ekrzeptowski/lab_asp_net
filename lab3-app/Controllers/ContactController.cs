@@ -123,5 +123,29 @@ namespace lab3_app.Controllers
                 return View();
             }
         }
+        
+        [HttpGet]
+        public IActionResult CreateApi()
+        {
+            Contact model = new Contact();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateApi(Contact c)
+        {
+            if (ModelState.IsValid)
+            {
+                _contactService.Add(c);
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
+        }
+        
+        public IActionResult PagedIndex([FromQuery]int page = 1,[FromQuery] int size = 5) 
+        { 
+            return View(_contactService.FindPage(page, size)); 
+        }
     }
 }

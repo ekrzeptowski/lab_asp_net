@@ -10,5 +10,6 @@ namespace lab3_app.Models
         List<Contact> FindAll();
         Contact? FindById(int id);
         List<OrganizationEntity> FindAllOrganizationsForViewModel();
+        PagingList<Contact> FindPage(int page, int size);
     }
 }

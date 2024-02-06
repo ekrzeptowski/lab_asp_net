@@ -1,0 +1,76 @@
+﻿@model PagingList<Contact>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h2>Lista kontaktów</h2>
+<a class="btn btn-primary" asp-action="Create" asp-controller="Contact">Dodaj kontakt</a>
+<a class="btn btn-primary" asp-action="CreateApi" asp-controller="Contact">Dodaj kontakt (API)</a>
+
+<table>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.Email)</th>
+        <th>@Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.Priority)</th>
+        <th>Akcje</th>
+    </tr>
+    @foreach (var contact in @Model.Data)
+    {
+        <tr>
+            <td>@contact.Name</td>
+            <td>@contact.Email</td>
+            <td>@contact.Priority.GetDisplayName()</td>
+            <td>
+                <a class="btn btn-primary" asp-action="Edit" asp-controller="Contact" asp-route-id=@contact.Id>Edytuj</a>
+                <a class="btn btn-primary" asp-action="Details" asp-controller="Contact" asp-route-id=@contact.Id>Szczegóły</a>
+                <a class="btn btn-primary" asp-action="Delete" asp-controller="Contact" asp-route-id=@contact.Id>Usuń</a>
+            </td>
+        </tr>
+    }
+    
+</table>
+<nav aria-label="Books page navigation"> 
+    <ul class="pagination"> 
+        @if (Model.IsPrevious) 
+        { 
+            <li class="page-item">
+                <a class="page-link" 
+                   asp-controller="Contact" 
+                   asp-action="PagedIndex" 
+                   asp-route-page="@(Model.Page - 1)" 
+                   asp-route-size="@Model.Size">
+                    Poprzednia
+                </a>
+            </li> 
+        } 
+        else 
+        { 
+            <li class="page-item disabled">
+                <a class="page-link">Poprzednia</a>
+            </li> 
+        } 
+        <li class="page-item disabled">
+            <a class="page-link" >@Model.Page</a>
+        </li> 
+        @if (Model.IsNext) 
+        { 
+            <li class="page-item">
+                <a class="page-link" 
+                   asp-controller="Contact" 
+                   asp-action="PagedIndex" 
+                   asp-route-page="@(Model.Page + 1)" 
+                   asp-route-size="@Model.Size">
+                    Następna
+                </a>
+            </li> 
+        } 
+        else 
+        { 
+            <li class="page-item disabled">
+                <a class="page-link">Następna</a>
+            </li> 
+        } 
+    </ul>
+</nav>
