@@ -1,6 +1,7 @@
 ﻿using lab3_app.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace lab3_app.Controllers
 {
@@ -19,7 +20,12 @@ namespace lab3_app.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            Contact model = new Contact();
+            model.Organizations =  _contactService
+                .FindAllOrganizationsForViewModel()
+                .Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Title })
+                .ToList();
+            return View(model);
         }
 
         [HttpGet]
@@ -28,6 +34,10 @@ namespace lab3_app.Controllers
             var contact = _contactService.FindById(id);
             if (contact is not null)
             {
+                contact.Organizations =  _contactService
+                    .FindAllOrganizationsForViewModel()
+                    .Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.Title })
+                    .ToList();
                 return View(contact);
             }
             else

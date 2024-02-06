@@ -13,6 +13,8 @@ namespace lab3_app.Mappers
                 Name = entity.Name,
                 Email = entity.Email,
                 Phone = entity.Phone,
+                OrganizationId = entity.OrganizationId,
+                Organization = entity.Organization,
                 Priority = (Priority)entity.Priority,
                 Birth = entity.Birth
             };
@@ -26,6 +28,7 @@ namespace lab3_app.Mappers
                 Name = contact.Name,
                 Email = contact.Email,
                 Phone = contact.Phone,
+                OrganizationId = contact.OrganizationId,
                 Priority = (int)contact.Priority,
                 Birth = contact.Birth
             };

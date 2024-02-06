@@ -8,6 +8,7 @@ namespace Data
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<ContactEntity> Contacts { get; set; }
+        public DbSet<OrganizationEntity> Organizations { get; set; }
         public DbSet<ProductEntity> Products { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -88,12 +89,45 @@ namespace Data
                 RoleId = USER_ROLE_ID,
                 UserId = USER_ID
             });
+            
+            modelBuilder.Entity<OrganizationEntity>()
+                .OwnsOne(e => e.Address);
 
             modelBuilder.Entity<ContactEntity>().HasKey(e => e.Id);
+            modelBuilder.Entity<ContactEntity>()
+                .HasOne(e => e.Organization)
+                .WithMany(o => o.Contacts)
+                .HasForeignKey(e => e.OrganizationId);
+            
+            modelBuilder.Entity<OrganizationEntity>().HasData(
+                new OrganizationEntity()
+                {
+                    Id = 1,
+                    Title = "WSEI",
+                    Nip = "83492384",
+                    Regon = "13424234",
+                },
+                new OrganizationEntity()
+                {
+                    Id = 2,
+                    Title = "Firma",
+                    Nip = "2498534",
+                    Regon = "0873439249",
+                }
+            );
+            
             modelBuilder.Entity<ContactEntity>().HasData(
-                new ContactEntity { Id = 1, Name = "Test", Email = "aaa@aaa.aaa", Phone = "1111111", Priority = 1, Birth = new DateTime(2000, 10, 11) },
-                new ContactEntity { Id = 2, Name = "Ewewe", Email = "asd@fg.sss", Phone = "552325", Priority = 0, Birth = new DateTime(2004, 1, 11) }
+                new ContactEntity { Id = 1, Name = "Test", Email = "aaa@aaa.aaa", Phone = "1111111", Priority = 1, Birth = new DateTime(2000, 10, 11), OrganizationId = 1},
+                new ContactEntity { Id = 2, Name = "Ewewe", Email = "asd@fg.sss", Phone = "552325", Priority = 0, Birth = new DateTime(2004, 1, 11), OrganizationId = 2}
                 );
+            
+            modelBuilder.Entity<OrganizationEntity>()
+                .OwnsOne(e => e.Address)
+                .HasData(
+                    new { OrganizationEntityId = 1, City = "Kraków", Street = "Św. Filipa 17", PostalCode = "31-150", Region = "małopolskie" },
+                    new { OrganizationEntityId = 2, City = "Kraków", Street = "Krowoderska 45/6", PostalCode = "31-150", Region = "małopolskie" }
+                );
+            
             modelBuilder.Entity<ProductEntity>().HasKey(e => e.Id);
             modelBuilder.Entity<ProductEntity>().HasData(
                 new ProductEntity { Id = 1, Name = "Product1 abc", Producent = "Producent1", Price = 10.0m, ProductionDate = new DateTime(2000, 10, 10), Description = "Description1" },

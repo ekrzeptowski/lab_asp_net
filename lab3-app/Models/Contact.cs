@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using Data.Entities;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace lab3_app.Models
 {
@@ -25,6 +28,15 @@ namespace lab3_app.Models
         [Display(Name = "Data urodzenia")]
         [DataType(DataType.Date, ErrorMessage = "Podaj poprawną datę")]
         public DateTime Birth { get; set; }
+        
+        [HiddenInput]
+        public int OrganizationId { get; set; }
+
+        [ValidateNever]
+        public List<SelectListItem> Organizations{ get; set; }
+        
+        [ValidateNever]
+        public virtual OrganizationEntity Organization { get; set; }
 
         [Display(Name = "Priorytet")]
         public Priority Priority { get; set; }

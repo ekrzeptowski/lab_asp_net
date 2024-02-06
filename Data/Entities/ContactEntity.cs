@@ -16,5 +16,7 @@ namespace Data.Entities
         public string Phone { get; set; }
         public DateTime Birth { get; set; }
         public int Priority { get; set; }
+        public int OrganizationId{ get; set; }
+        public OrganizationEntity? Organization { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Data;
 using Data.Entities;
 using lab3_app.Mappers;
+using Microsoft.EntityFrameworkCore;
 
 namespace lab3_app.Models
 {
@@ -33,7 +34,15 @@ namespace lab3_app.Models
 
         public Contact? FindById(int id)
         {
-            return ContactMapper.FromEntity(_context.Contacts.Find(id));
+            return ContactMapper.FromEntity(_context.Contacts
+                .Include(c => c.Organization)
+                .AsNoTracking()
+                .FirstOrDefault(c => c.Id == id));
+        }
+
+        public List<OrganizationEntity> FindAllOrganizationsForViewModel()
+        {
+            return _context.Organizations.ToList();
         }
 
         public void Update(Contact contact)
