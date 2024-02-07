@@ -16,5 +16,8 @@ namespace Data.Entities
         public string Producent { get; set; }
         public DateTime ProductionDate { get; set; }
         public string? Description { get; set; }
+        public int CategoryId { get; set; }
+        public CategoryEntity? Category { get; set; }
+        public ISet<ReviewEntity> Reviews { get; set; }
     }
 }
