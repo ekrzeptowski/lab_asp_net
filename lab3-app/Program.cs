@@ -36,6 +36,7 @@ namespace lab3_app
 
             app.UseRouting();
 
+            app.UseMiddleware<LastVisitCookie>();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
