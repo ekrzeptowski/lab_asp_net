@@ -1,8 +1,10 @@
 ﻿using lab3_app.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lab3_app.Controllers;
 
+[Authorize(Roles = "admin")]
 public class CategoryController : Controller
 {
     private readonly ICategoryService _categoryService;

@@ -1,9 +1,44 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var categories = ViewData["Categories"] as List<Category>;
+    var itemsInCart = ViewData["CartItems"] as List<Cart>;
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <h3>Last visit: @ViewData["Visit"]</h3>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">
+        Witaj w sklepie,
+        @if (User.Identity.IsAuthenticated)
+        {
+            @User.Identity.Name
+        }
+        else
+        {
+            <span>nieznajomy</span>
+        }
+    </h1>
+    <h3>Twoja ostatnia wizyta: @ViewData["Visit"]</h3>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @if (itemsInCart.Count == 0)
+        {
+            <p>Twój koszyk jest pusty</p>
+        }
+        else
+        {
+            <p>Masz obecnie @itemsInCart.Count produktów w koszyku</p>
+        }
+
+        <p>Wybierz kategorię produktów:</p>
+        @foreach (var category in categories)
+        {
+            <a class="btn btn-primary" asp-action="Browse" asp-controller="Cart" asp-route-categoryId="@category.Id">@category.Name</a>
+        }
+
+        <a class="btn btn-primary" asp-action="Checkout" asp-controller="Cart">Przejdź do koszyka</a>
+    }
+    else
+    {
+        <p>Zaloguj się żeby móc korzystać z usług sklepu</p>
+    }
+
 </div>

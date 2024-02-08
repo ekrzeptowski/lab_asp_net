@@ -1,0 +1,35 @@
+﻿@model List<Cart>
+
+@{
+}
+
+<h2>Zamówienie zostało złożone</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Nazwa produktu</th>
+        <th>Ilość</th>
+        <th>Cena</th>
+        <th>Suma</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Product.Name</td>
+            <td>@item.Quantity</td>
+            <td>@item.Product.Price</td>
+            <td>@(item.Quantity * item.Product.Price)</td>
+        </tr>
+    }
+    </tbody>
+
+    <tfoot>
+    <tr>
+        <td colspan="3">Razem:</td>
+        <td>@Model.Sum(x => x.Quantity * x.Product.Price)</td>
+    </tr>
+    </tfoot>
+</table>

@@ -1,8 +1,10 @@
 ﻿using lab3_app.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace lab3_app.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
@@ -117,5 +119,6 @@ namespace lab3_app.Controllers
                 return View();
             }
         }
+        
     }
 }
