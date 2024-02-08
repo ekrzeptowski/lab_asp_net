@@ -1,4 +1,6 @@
-﻿namespace lab3_app.Models
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace lab3_app.Models
 {
     public interface IProductService
     {
@@ -7,5 +9,6 @@
         void Update(Product product);
         List<Product> FindAll();
         Product? FindById(int id);
+        List<SelectListItem> FindAllCategoriesForViewModel();
     }
 }

@@ -1,0 +1,19 @@
+﻿@model Category
+
+@{
+}
+
+<h2>
+    Dodawanie kategorii
+</h2>
+
+<form asp-action="Create" asp-controller="Category">
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name"/>
+        <label asp-for="Description"></label>
+        <input asp-for="Description"/>
+        <input type="submit" value="Zapisz" class="btn btn-primary"/>
+        <a class="btn btn-primary" asp-action="Index" asp-controller="Category">Anuluj</a>
+    </div>
+</form>

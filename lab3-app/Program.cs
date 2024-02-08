@@ -17,7 +17,7 @@ namespace lab3_app
 
             builder.Services.AddTransient<IContactService, EFContactService>();
             builder.Services.AddTransient<IProductService, EFProductService>();
-            // builder.Services.AddTransient<ICategoryService, EFCategoryService>();
+            builder.Services.AddTransient<ICategoryService, EFCategoryService>();
             builder.Services.AddTransient<IReviewService, EFReviewService>();
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
             builder.Services.AddMemoryCache();

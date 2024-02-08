@@ -1,0 +1,27 @@
+﻿@model List<Category>
+
+@{
+}
+
+<h2>Lista kategorii</h2>
+<a class="btn btn-primary" asp-action="Create" asp-controller="Category">Dodaj kategorię</a>
+<table>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model[0].Name)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Description)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Products)</th>
+        <th>Akcje</th>
+    </tr>
+    @foreach (var category in Model)
+    {
+        <tr>
+            <td>@category.Name</td>
+            <td>@category.Description</td>
+            <td>@category.Products?.Count</td>
+            <td>
+                <a class="btn btn-primary" asp-action="Edit" asp-controller="Category" asp-route-id=@category.Id>Edytuj</a>
+                <a class="btn btn-primary" asp-action="Delete" asp-controller="Category" asp-route-id=@category.Id>Usuń</a>
+            </td>
+        </tr>
+    }
+</table>

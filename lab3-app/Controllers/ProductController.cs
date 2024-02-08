@@ -6,16 +6,23 @@ namespace lab3_app.Controllers
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
-        public ProductController(IProductService productService) => _productService = productService;
+
+        public ProductController(IProductService productService)
+        {
+            _productService = productService;
+        }
 
         public IActionResult Index()
         {
             return View(_productService.FindAll());
         }
+
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            var product = new Product();
+            product.Categories = _productService.FindAllCategoriesForViewModel();
+            return View(product);
         }
 
         [HttpGet]
@@ -24,6 +31,7 @@ namespace lab3_app.Controllers
             var product = _productService.FindById(id);
             if (product is not null)
             {
+                product.Categories = _productService.FindAllCategoriesForViewModel();
                 return View(product);
             }
             else
@@ -79,7 +87,6 @@ namespace lab3_app.Controllers
         {
             if (ModelState.IsValid)
             {
-               
                 _productService.Add(product);
 
                 return RedirectToAction("Index");

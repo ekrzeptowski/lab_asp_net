@@ -15,6 +15,8 @@ namespace lab3_app.Mappers
                 Description = entity.Description,
                 ProductionDate = entity.ProductionDate,
                 Producent = entity.Producent,
+                Category = entity.Category,
+                CategoryId = entity.CategoryId,
                 Reviews = entity.Reviews
             };
         }
@@ -29,7 +31,7 @@ namespace lab3_app.Mappers
                 Description = product.Description,
                 ProductionDate = product.ProductionDate,
                 Producent = product.Producent,
-                Reviews = product.Reviews
+                CategoryId = product.CategoryId
             };
         }
     }

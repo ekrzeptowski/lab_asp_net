@@ -1,0 +1,25 @@
+﻿@model Category
+
+@{
+}
+
+// if category contains any products then it should not be deleted
+@if (Model.Products.Count > 0)
+{
+    <h2>Usuń kategorię</h2>
+    <h4>Nie można usunąć kategorii, która zawiera produkty</h4>
+    <a class="btn btn-primary" asp-action="Index" asp-controller="Category">Powrót</a>
+    return;
+}
+
+<h2>Usuń kategorię</h2>
+
+<form asp-action="Delete" asp-controller="Category">
+<div>
+    <h4>Czy na pewno chcesz usunąć kategorię: @Model.Name?</h4>
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Usuń" class="btn btn-primary" />
+    <a class="btn btn-primary" asp-action="Index" asp-controller="Category">Anuluj</a>
+</div>
+
+</form>

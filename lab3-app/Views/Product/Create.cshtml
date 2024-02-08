@@ -11,35 +11,42 @@
         <div>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        <input class="form-control" type="text" asp-for="Name" />
+        <input class="form-control" type="text" asp-for="Name"/>
     </div>
     <div>
         <label asp-for="Price"></label>
         <div>
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
-        <input class="form-control" type="number" min="0" max="10000000" step="0.000" asp-for="Price" />
+        <input class="form-control" type="number" min="0" max="10000000" step="0.000" asp-for="Price"/>
     </div>
     <div>
         <label asp-for="Producent"></label>
         <div>
             <span asp-validation-for="Producent" class="text-danger"></span>
         </div>
-        <input class="form-control" type="text" asp-for="Producent" />
+        <input class="form-control" type="text" asp-for="Producent"/>
+    </div>
+    <div>
+        <label asp-for="CategoryId">Kategoria</label>
+        <div>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+        <select class="form-control" asp-for="CategoryId" asp-items="@Model.Categories"></select>
     </div>
     <div>
         <label asp-for="ProductionDate"></label>
         <div>
             <span asp-validation-for="ProductionDate" class="text-danger"></span>
         </div>
-        <input class="form-control" type="date" asp-for="ProductionDate" />
+        <input class="form-control" type="date" asp-for="ProductionDate"/>
     </div>
     <div>
         <label asp-for="Description"></label>
         <div>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-        <input class="form-control" type="text" asp-for="Description" />
+        <input class="form-control" type="text" asp-for="Description"/>
     </div>
     <div>
         <button type="submit" class="btn btn-primary">Dodaj</button>

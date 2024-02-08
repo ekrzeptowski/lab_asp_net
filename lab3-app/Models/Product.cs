@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using Data.Entities;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace lab3_app.Models
 {
@@ -30,11 +33,14 @@ namespace lab3_app.Models
         [Display(Name = "Opis")]
         public string? Description { get; set; }
         
-        [ValidateNever]
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        [ValidateNever]
+        public CategoryEntity Category { get; set; }
         
         [ValidateNever]
         public List<ReviewEntity> Reviews { get; set; }
+
+        [ValidateNever]
+        public List<SelectListItem> Categories { get; set; }
     }
 }

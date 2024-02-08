@@ -1,6 +1,7 @@
 ﻿using Data;
 using Data.Entities;
 using lab3_app.Mappers;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace lab3_app.Models
@@ -34,7 +35,7 @@ namespace lab3_app.Models
 
         public Product? FindById(int id)
         {
-            return ProductMapper.FromEntity(_context.Products.Include(p => p.Reviews).ThenInclude(r => r.User).FirstOrDefault(p => p.Id == id));
+            return ProductMapper.FromEntity(_context.Products.Include(p => p.Category).Include(p => p.Reviews).ThenInclude(r => r.User).AsNoTracking().FirstOrDefault(p => p.Id == id));
         }
 
         public void Update(Product product)
