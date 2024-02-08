@@ -1,0 +1,26 @@
+﻿@model Review
+
+@{ }
+
+<h2>Usuń recenzję</h2>
+
+<form asp-action="Delete" asp-controller="Review">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id"/>
+    <input type="hidden" asp-for="ProductId"/>
+    <div class="form-group">
+        <label asp-for="Comment" class="control-label"></label>
+        <input asp-for="Comment" class="form-control" disabled/>
+        <span asp-validation-for="Comment" class="text-danger"></span>
+    </div>
+    <div class="form-group
+    ">
+        <label asp-for="Rating" class="control-label"></label>
+        <input asp-for="Rating" class="form-control" disabled/>
+        <span asp-validation-for="Rating" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Usuń" class="btn btn-danger"/>
+        <a asp-action="Details" asp-controller="Product" asp-route-id="@Model.ProductId" class="btn btn-primary">Anuluj</a>
+    </div>
+</form>

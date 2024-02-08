@@ -14,7 +14,8 @@ namespace lab3_app.Mappers
                 Price = entity.Price,
                 Description = entity.Description,
                 ProductionDate = entity.ProductionDate,
-                Producent = entity.Producent
+                Producent = entity.Producent,
+                Reviews = entity.Reviews
             };
         }
 
@@ -27,7 +28,8 @@ namespace lab3_app.Mappers
                 Price = product.Price,
                 Description = product.Description,
                 ProductionDate = product.ProductionDate,
-                Producent = product.Producent
+                Producent = product.Producent,
+                Reviews = product.Reviews
             };
         }
     }

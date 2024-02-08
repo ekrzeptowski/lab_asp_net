@@ -18,6 +18,6 @@ namespace Data.Entities
         public string? Description { get; set; }
         public int CategoryId { get; set; }
         public CategoryEntity? Category { get; set; }
-        public ISet<ReviewEntity> Reviews { get; set; }
+        public List<ReviewEntity> Reviews { get; set; }
     }
 }

@@ -29,5 +29,12 @@ namespace lab3_app.Models
 
         [Display(Name = "Opis")]
         public string? Description { get; set; }
+        
+        [ValidateNever]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
+        
+        [ValidateNever]
+        public List<ReviewEntity> Reviews { get; set; }
     }
 }
