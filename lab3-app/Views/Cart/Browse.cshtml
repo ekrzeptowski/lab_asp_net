@@ -21,6 +21,7 @@
     <div class="card card-body m-1">
         <h3 class="card-title">@product.Name</h3>
         <p class="card-text">@product.Description</p>
+        <a asp-action="Product" asp-route-id="@product.Id">Więcej informacji</a>
         <p title="@product.AverageReview.ToString("0.00")">@GetStarRating(product.AverageReview) (@product.ReviewCount)</p>
         <p>Cena: @product.Price</p>
         <form asp-controller="Cart" asp-action="AddToCart" method="post" class="d-inline-block">

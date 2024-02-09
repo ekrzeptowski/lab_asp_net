@@ -41,8 +41,15 @@ namespace lab3_app.Models
 
         public Product? FindById(int id)
         {
-            return ProductMapper.FromEntity(_context.Products.Include(p => p.Category).Include(p => p.Reviews)
+            var product = ProductMapper.FromEntity(_context.Products.Include(p => p.Category).Include(p => p.Reviews)
                 .ThenInclude(r => r.User).AsNoTracking().FirstOrDefault(p => p.Id == id));
+            if (product != null)
+            {
+                product.AverageReview = product.Reviews.Count > 0 ? product.Reviews.Select(r => r.Rating).Average() : 0;
+                product.ReviewCount = product.Reviews.Count;
+                return product;
+            }
+            return null;
         }
 
         public void Update(Product product)

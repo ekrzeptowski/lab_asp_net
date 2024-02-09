@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace lab3_app.Models;
 
@@ -25,7 +26,9 @@ public class Review
     [HiddenInput]
     public int ProductId { get; set; }
     
+    [ValidateNever]
     public Product Product { get; set; }
     
+    [ValidateNever]
     public IdentityUser User { get; set; }
 }

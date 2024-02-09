@@ -1,0 +1,42 @@
+﻿@using System.Security.Claims
+@model Product
+
+@{
+}
+
+<h2>Produkt</h2>
+
+<div class="card card-body m-1">
+    <h3 class="card-title">@Model.Name</h3>
+
+<p class="card-text">@Model.Description</p>
+    <p>Średnia ocena: @Model.AverageReview.ToString("0.00") (@Model.ReviewCount)</p>
+    <p>Cena: @Model.Price</p>
+    <form asp-controller="Cart" asp-action="AddToCart" method="post" class="d-inline-block">
+        <input type="hidden" name="productId" value="@Model.Id"/>
+        <input class="form-control" type="number" name="quantity" value="1" min="1" max="10" step="1"/>
+        <input class="form-control" type="submit" value="Dodaj do koszyka"/>
+    </form>
+</div>
+
+<p>Opinie:</p>
+<div class="card card-body m-1">
+    <p class="card-title">
+        Dodaj opinię
+    </p>
+    <form asp-controller="Review" asp-action="AddReview" method="post">
+        <input type="hidden" name="productId" value="@Model.Id"/>
+        <input type="hidden" name="userId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)"/>
+        <input class="form-control" type="text" name="comment" placeholder="Komentarz"/>
+        <input class="form-control" type="number" name="rating" min="1" max="5" step="1" placeholder="Ocena"/>
+        <input class="form-control" type="submit" value="Dodaj opinię"/>
+    </form>
+</div>
+@foreach (var review in Model.Reviews)
+{
+    <div class="card card-body m-1">
+        <p class="card-text">@review.Comment</p>
+        <p>Autor: ***@review.User.UserName.Substring(review.User.UserName.Length - 3)</p>
+        <p>Ocena: @review.Rating</p>
+    </div>
+}

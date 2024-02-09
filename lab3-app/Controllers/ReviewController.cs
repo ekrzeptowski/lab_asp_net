@@ -1,4 +1,5 @@
-﻿using lab3_app.Models;
+﻿using System.Security.Claims;
+using lab3_app.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,21 @@ public class ReviewController : Controller
     private readonly IReviewService _reviewService;
     public ReviewController(IReviewService reviewService) => _reviewService = reviewService;
 
+    [HttpPost]
+    [Authorize(Roles = "admin, user")]
+    public IActionResult AddReview([FromForm] Review review)
+    {
+        if (ModelState.IsValid)
+        {
+            _reviewService.Add(review);
+            return RedirectToAction("Product", "Cart", new { id = review.ProductId });
+        }
+        else
+        {
+            return NotFound();
+        }
+    }
+    
     [HttpGet]
     public IActionResult Edit([FromRoute] int id)
     {

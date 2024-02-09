@@ -67,5 +67,19 @@ public class CartController : Controller
         var products = _productService.FindAll().Where(p => p.CategoryId == categoryId).ToList();
         return View(products);
     }
+    
+    [HttpGet]
+    public IActionResult Product([FromRoute] int id)
+    {
+        var product = _productService.FindById(id);
+        if (product is not null)
+        {
+            return View(product);
+        }
+        else
+        {
+            return NotFound();
+        }
+    }
 
 }
