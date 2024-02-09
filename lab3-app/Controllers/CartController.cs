@@ -9,11 +9,13 @@ public class CartController : Controller
 {
     private readonly ICartService _cartService;
     private readonly IProductService _productService;
+    private readonly IReviewService _reviewService;
 
-    public CartController(ICartService cartService, IProductService productService)
+    public CartController(ICartService cartService, IProductService productService, IReviewService reviewService)
     {
         _cartService = cartService;
         _productService = productService;
+        _reviewService = reviewService;
     }
 
     [HttpPost]
@@ -38,6 +40,20 @@ public class CartController : Controller
         {
             _cartService.Delete(id);
             return RedirectToAction("Checkout");
+        }
+        else
+        {
+            return NotFound();
+        }
+    }
+    
+    [HttpPost]
+    public IActionResult AddReview([FromForm] Review review)
+    {
+        if (ModelState.IsValid)
+        {
+            _reviewService.Add(review);
+            return RedirectToAction("Product", "Cart", new { id = review.ProductId });
         }
         else
         {

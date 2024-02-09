@@ -24,7 +24,7 @@
     <p class="card-title">
         Dodaj opinię
     </p>
-    <form asp-controller="Review" asp-action="AddReview" method="post">
+    <form asp-action="AddReview" method="post">
         <input type="hidden" name="productId" value="@Model.Id"/>
         <input type="hidden" name="userId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)"/>
         <input class="form-control" type="text" name="comment" placeholder="Komentarz"/>
