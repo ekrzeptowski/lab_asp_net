@@ -3,13 +3,25 @@
 @{
 }
 
-<h2>Lista produktów</h2>
+@functions {
+    public string GetStarRating(double averageReview) {
+        string starRating = "";
+        for (int i = 1; i <= averageReview; i++) {
+            starRating += "⭐";
+        }
+        return starRating;
+    }
+}
 
+<h2>Lista produktów</h2>
+<div class="d-flex flex-wrap">
+    
 @foreach (var product in Model)
 {
-    <div>
-        <h3>@product.Name</h3>
-        <p>@product.Description</p>
+    <div class="card card-body m-1">
+        <h3 class="card-title">@product.Name</h3>
+        <p class="card-text">@product.Description</p>
+        <p title="@product.AverageReview.ToString("0.00")">@GetStarRating(product.AverageReview) (@product.ReviewCount)</p>
         <p>Cena: @product.Price</p>
         <form asp-controller="Cart" asp-action="AddToCart" method="post" class="d-inline-block">
             <input type="hidden" name="productId" value="@product.Id" />
@@ -18,3 +30,4 @@
         </form>
     </div>
 }
+</div>

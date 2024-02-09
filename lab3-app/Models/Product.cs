@@ -42,5 +42,9 @@ namespace lab3_app.Models
 
         [ValidateNever]
         public List<SelectListItem> Categories { get; set; }
+        [ValidateNever]
+        public int ReviewCount { get; set; }
+        [ValidateNever]
+        public double AverageReview { get; set; }
     }
 }
