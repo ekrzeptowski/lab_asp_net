@@ -9,13 +9,13 @@ public class CartController : Controller
 {
     private readonly ICartService _cartService;
     private readonly IProductService _productService;
-    
+
     public CartController(ICartService cartService, IProductService productService)
     {
         _cartService = cartService;
         _productService = productService;
     }
-    
+
     [HttpPost]
     public IActionResult AddToCart([FromForm] int productId, [FromForm] int quantity)
     {
@@ -30,7 +30,7 @@ public class CartController : Controller
             return NotFound();
         }
     }
-    
+
     [HttpPost]
     public IActionResult RemoveFromCart([FromForm] int id)
     {
@@ -44,30 +44,28 @@ public class CartController : Controller
             return NotFound();
         }
     }
-    
+
     [HttpGet]
     public IActionResult Checkout()
     {
-
         return View(_cartService.FindCartsByUser(User.Identity.Name));
     }
-    
+
     [HttpPost]
     public IActionResult Checkout([FromForm] List<Cart> carts)
     {
         var cartItems = _cartService.FindCartsByUser(User.Identity.Name);
         _cartService.ClearCartByUser(User.Identity.Name);
         return View("Summary", cartItems);
-        
     }
-    
-    [HttpGet("Cart/Browse/{categoryId}")]
-    public IActionResult Browse([FromRoute] int categoryId)
+
+    [HttpGet]
+    public IActionResult Browse([FromRoute] int id, [FromQuery] int page = 1, [FromQuery] int limit = 10)
     {
-        var products = _productService.FindAll().Where(p => p.CategoryId == categoryId).ToList();
+        var products = _productService.FindPage(id, page, limit);
         return View(products);
     }
-    
+
     [HttpGet]
     public IActionResult Product([FromRoute] int id)
     {
@@ -81,5 +79,4 @@ public class CartController : Controller
             return NotFound();
         }
     }
-
 }

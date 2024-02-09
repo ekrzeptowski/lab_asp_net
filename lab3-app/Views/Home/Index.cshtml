@@ -31,7 +31,7 @@
         <p>Wybierz kategorię produktów:</p>
         @foreach (var category in categories)
         {
-            <a class="btn btn-primary" asp-action="Browse" asp-controller="Cart" asp-route-categoryId="@category.Id">@category.Name</a>
+            <a class="btn btn-primary" asp-action="Browse" asp-controller="Cart" asp-route-id="@category.Id">@category.Name</a>
         }
 
         <a class="btn btn-primary" asp-action="Checkout" asp-controller="Cart">Przejdź do koszyka</a>

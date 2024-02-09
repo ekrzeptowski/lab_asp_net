@@ -10,5 +10,6 @@ namespace lab3_app.Models
         List<Product> FindAll();
         Product? FindById(int id);
         List<SelectListItem> FindAllCategoriesForViewModel();
+        PagingList<Product> FindPage(int id, int page, int limit);
     }
 }

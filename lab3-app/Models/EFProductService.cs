@@ -36,6 +36,30 @@ namespace lab3_app.Models
                 product.AverageReview = product.Reviews.Count > 0 ? product.Reviews.Select(r => r.Rating).Average() : 0;
                 product.ReviewCount = product.Reviews.Count;
             }
+
+            return products;
+        }
+
+        public PagingList<Product> FindPage(int id, int page, int limit)
+        {
+            var products = PagingList<Product>.Create(
+                (p, s) => _context.Products
+                    .Include(p => p.Reviews)
+                    .Where(entity => entity.CategoryId == id)
+                    .OrderBy(b => b.Name)
+                    .Skip((page - 1) * limit)
+                    .Take(s)
+                    .Select(e => ProductMapper.FromEntity(e))
+                    .ToList(),
+                _context.Products.Where(entity => entity.CategoryId == id).Count(),
+                page,
+                limit);
+            foreach (var product in products.Data)
+            {
+                product.AverageReview = product.Reviews.Count > 0 ? product.Reviews.Select(r => r.Rating).Average() : 0;
+                product.ReviewCount = product.Reviews.Count;
+            }
+
             return products;
         }
 
@@ -49,6 +73,7 @@ namespace lab3_app.Models
                 product.ReviewCount = product.Reviews.Count;
                 return product;
             }
+
             return null;
         }
 
